@@ -30,5 +30,20 @@ def trading_flattish_dlc(data, sell_off_v, time_l, wait_t, loss_cut_v, position_
             pos=pos+1 #we are increasing the starting position by 1
     return positions
   
-  #backtesting function that identifies the best variables to maximize returns
+#backtesting function that identifies the best variables to maximize returns
+def variables(data):
+    values=list()
+    for sell_off_v in range(3, 10, 1):
+        sov=sell_off_v/100
+        for time_l in range(5, 20, 1):
+            for wait_t in range(10, 90, 1):
+                for loss_cut_v in range(93, 98, 1):
+                    lcv=loss_cut_v/100
+                    for position_sell in range(10, 30, 1):
+                        ps=1+position_sell/100
+                        a=trading_flattish(data, sov, time_l, wait_t, lcv, ps)
+                        values.append([perf(a), (sov, time_l, wait_t, lcv, ps)])
+    values.sort(key=lambda x:x[0])
+    return values
+
   
