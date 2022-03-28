@@ -16,7 +16,7 @@ def trading_flattish_dlc(data, sell_off_v, time_l, wait_t, loss_cut_v, position_
                 #finding the next value where overall performance > position_sell
                 for kk in range(wait_t):
                     perf=data['close'].iloc[pos+time_l+kk]/data['close'].iloc[pos+time_l]
-                    lc_perf=data['close'].iloc[pos+time_l+kk]/data['close'].iloc[pos+time_l]
+                    lc_perf=data['low'].iloc[pos+time_l+kk]/data['low'].iloc[pos+time_l]
                     if lc_perf<loss_cut_v:
                         positions.append([data['date'].iloc[pos+time_l], data['date'].iloc[pos+kk+time_l],lc_perf,pos+time_l,pos+kk+time_l])
                         break
